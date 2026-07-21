@@ -14,7 +14,16 @@ interface Props {
 type DragState =
   | null
   | { kind: "move"; startX: number; startY: number; ox: number; oy: number }
-  | { kind: "resize"; corner: "nw" | "ne" | "sw" | "se"; startX: number; startY: number; ox: number; oy: number; ow: number; oh: number };
+  | {
+      kind: "resize";
+      corner: "nw" | "ne" | "sw" | "se";
+      startX: number;
+      startY: number;
+      ox: number;
+      oy: number;
+      ow: number;
+      oh: number;
+    };
 
 export function EditableObject({ obj, containerW, containerH, onSelect, onChange }: Props) {
   const selectedId = useEditor((s) => s.selectedId);
@@ -72,7 +81,16 @@ export function EditableObject({ obj, containerW, containerH, onSelect, onChange
   const startResize = (corner: "nw" | "ne" | "sw" | "se") => (e: React.PointerEvent) => {
     e.stopPropagation();
     onSelect(obj.id);
-    setDrag({ kind: "resize", corner, startX: e.clientX, startY: e.clientY, ox: obj.x, oy: obj.y, ow: obj.w, oh: obj.h });
+    setDrag({
+      kind: "resize",
+      corner,
+      startX: e.clientX,
+      startY: e.clientY,
+      ox: obj.x,
+      oy: obj.y,
+      ow: obj.w,
+      oh: obj.h,
+    });
   };
 
   const px = obj.x * containerW;
@@ -167,7 +185,9 @@ export function EditableObject({ obj, containerW, containerH, onSelect, onChange
       </svg>
     );
   } else if (obj.type === "highlight") {
-    content = <div style={{ width: "100%", height: "100%", background: obj.color, opacity: 0.35 }} />;
+    content = (
+      <div style={{ width: "100%", height: "100%", background: obj.color, opacity: 0.35 }} />
+    );
   } else if (obj.type === "image") {
     content = <img src={obj.src} alt="" className="h-full w-full object-fill" draggable={false} />;
   } else if (obj.type === "note") {
@@ -202,7 +222,12 @@ export function EditableObject({ obj, containerW, containerH, onSelect, onChange
     );
   } else if (obj.type === "draw") {
     const pts = obj.points.map(([nx, ny]) => [nx * containerW, ny * containerH]);
-    const stroke = getStroke(pts, { size: obj.size, thinning: 0.5, smoothing: 0.5, streamline: 0.5 });
+    const stroke = getStroke(pts, {
+      size: obj.size,
+      thinning: 0.5,
+      smoothing: 0.5,
+      streamline: 0.5,
+    });
     let d = "";
     if (stroke.length) {
       d = `M ${stroke[0][0]} ${stroke[0][1]}`;

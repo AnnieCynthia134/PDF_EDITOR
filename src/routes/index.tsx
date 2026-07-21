@@ -18,7 +18,8 @@ export const Route = createFileRoute("/")({
       { property: "og:title", content: "PDF Editor" },
       {
         property: "og:description",
-        content: "Edit PDFs entirely in your browser — text, shapes, annotations, pages, and signatures.",
+        content:
+          "Edit PDFs entirely in your browser — text, shapes, annotations, pages, and signatures.",
       },
     ],
   }),

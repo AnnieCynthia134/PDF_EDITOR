@@ -37,8 +37,7 @@ async function main() {
   const p = src.addPage([612, 792]);
   p.drawText("Hello Original 123", { x: 72, y: 700, size: 24, font: f });
   const srcBytes = await src.save();
-  const dataUrl =
-    "data:application/pdf;base64," + Buffer.from(srcBytes).toString("base64");
+  const dataUrl = "data:application/pdf;base64," + Buffer.from(srcBytes).toString("base64");
 
   const mkDoc = (newStr: string): DocumentState => ({
     fileName: "t.pdf",
@@ -73,7 +72,10 @@ async function main() {
   const fonts1 = await listBaseFonts(out1);
   console.log("fonts (covered):", fonts1.join(", "));
   const arialCount1 = fonts1.filter((n) => /ArialMT/i.test(n)).length;
-  assert(arialCount1 >= 2, `original Arial face re-embedded for the edit (found ${arialCount1} ArialMT fonts)`);
+  assert(
+    arialCount1 >= 2,
+    `original Arial face re-embedded for the edit (found ${arialCount1} ArialMT fonts)`,
+  );
 
   // 3) New text contains 'Z' which the subset lacks -> standard-font fallback,
   // no crash, and no second Arial embed.
@@ -81,8 +83,14 @@ async function main() {
   const fonts2 = await listBaseFonts(out2);
   console.log("fonts (fallback):", fonts2.join(", "));
   const arialCount2 = fonts2.filter((n) => /ArialMT/i.test(n)).length;
-  assert(arialCount2 === 1, `subset lacking glyphs falls back to a standard font (found ${arialCount2} ArialMT fonts)`);
-  assert(fonts2.some((n) => /Helvetica/i.test(n)), "fallback used Helvetica");
+  assert(
+    arialCount2 === 1,
+    `subset lacking glyphs falls back to a standard font (found ${arialCount2} ArialMT fonts)`,
+  );
+  assert(
+    fonts2.some((n) => /Helvetica/i.test(n)),
+    "fallback used Helvetica",
+  );
 
   // 4) Squeeze path: much longer text (all glyphs available) still exports
   const out3 = await exportPdf(mkDoc("Hello Hello Hello Hello Hello Hello 123 123"));

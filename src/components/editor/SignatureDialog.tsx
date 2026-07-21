@@ -24,7 +24,10 @@ export function SignatureDialog({ open, onClose }: { open: boolean; onClose: () 
 
   const pos = (e: React.PointerEvent) => {
     const r = canvasRef.current!.getBoundingClientRect();
-    return { x: ((e.clientX - r.left) / r.width) * canvasRef.current!.width, y: ((e.clientY - r.top) / r.height) * canvasRef.current!.height };
+    return {
+      x: ((e.clientX - r.left) / r.width) * canvasRef.current!.width,
+      y: ((e.clientY - r.top) / r.height) * canvasRef.current!.height,
+    };
   };
 
   if (!open) return null;
@@ -42,7 +45,7 @@ export function SignatureDialog({ open, onClose }: { open: boolean; onClose: () 
     const src = canvasRef.current!.toDataURL("image/png");
     const page = doc.pages[currentPage];
     const w = 0.3;
-    const h = (w * (200 / 600)) * (page.width / page.height);
+    const h = w * (200 / 600) * (page.width / page.height);
     addObject({
       type: "image",
       page: currentPage,
@@ -58,10 +61,15 @@ export function SignatureDialog({ open, onClose }: { open: boolean; onClose: () 
   };
 
   return (
-    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/40" onClick={onClose}>
+    <div
+      className="fixed inset-0 z-50 flex items-center justify-center bg-black/40"
+      onClick={onClose}
+    >
       <div className="w-[640px] rounded-2xl bg-surface p-6" onClick={(e) => e.stopPropagation()}>
         <h3 className="mb-1 text-lg font-semibold">Draw signature</h3>
-        <p className="mb-4 text-xs text-muted-foreground">Sign with your mouse or finger. It will be placed on the current page.</p>
+        <p className="mb-4 text-xs text-muted-foreground">
+          Sign with your mouse or finger. It will be placed on the current page.
+        </p>
         <canvas
           ref={canvasRef}
           className="w-full cursor-crosshair rounded-md border bg-white"
@@ -92,8 +100,12 @@ export function SignatureDialog({ open, onClose }: { open: boolean; onClose: () 
           }}
         />
         <div className="mt-4 flex justify-end gap-2">
-          <button onClick={clear} className="rounded-md border px-3 py-1.5 text-xs">Clear</button>
-          <button onClick={onClose} className="rounded-md border px-3 py-1.5 text-xs">Cancel</button>
+          <button onClick={clear} className="rounded-md border px-3 py-1.5 text-xs">
+            Clear
+          </button>
+          <button onClick={onClose} className="rounded-md border px-3 py-1.5 text-xs">
+            Cancel
+          </button>
           <button
             disabled={!hasInk}
             onClick={insert}

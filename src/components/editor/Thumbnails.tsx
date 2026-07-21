@@ -62,7 +62,9 @@ export function Thumbnails() {
             selected={i === currentPage}
             onSelect={() => {
               setCurrentPage(i);
-              document.getElementById(`page-anchor-${i}`)?.scrollIntoView({ behavior: "smooth", block: "start" });
+              document
+                .getElementById(`page-anchor-${i}`)
+                ?.scrollIntoView({ behavior: "smooth", block: "start" });
             }}
             onDragStart={() => (dragFrom.current = i)}
             onDrop={() => {
@@ -129,13 +131,25 @@ function ThumbItem({
       <div className="mt-1 flex items-center justify-between">
         <span className="text-[10px] text-muted-foreground">{index + 1}</span>
         <div className="flex opacity-0 transition group-hover:opacity-100">
-          <button onClick={onRotate} title="Rotate" className="p-1 text-muted-foreground hover:text-foreground">
+          <button
+            onClick={onRotate}
+            title="Rotate"
+            className="p-1 text-muted-foreground hover:text-foreground"
+          >
             <RotateCw className="h-3 w-3" />
           </button>
-          <button onClick={onAddAfter} title="Add blank after" className="p-1 text-muted-foreground hover:text-foreground">
+          <button
+            onClick={onAddAfter}
+            title="Add blank after"
+            className="p-1 text-muted-foreground hover:text-foreground"
+          >
             <Plus className="h-3 w-3" />
           </button>
-          <button onClick={onDelete} title="Delete" className="p-1 text-muted-foreground hover:text-destructive">
+          <button
+            onClick={onDelete}
+            title="Delete"
+            className="p-1 text-muted-foreground hover:text-destructive"
+          >
             <Trash2 className="h-3 w-3" />
           </button>
         </div>

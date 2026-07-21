@@ -38,7 +38,8 @@ const tools: { key: Tool; icon: typeof Type; label: string }[] = [
 ];
 
 export function Toolbar({ onOpenSignature }: { onOpenSignature: () => void }) {
-  const { tool, setTool, undo, redo, doc, zoom, setZoom, closeDocument, historyIndex, history } = useEditor();
+  const { tool, setTool, undo, redo, doc, zoom, setZoom, closeDocument, historyIndex, history } =
+    useEditor();
   const fileInput = useRef<HTMLInputElement>(null);
   const [exporting, setExporting] = useState(false);
   const addObject = useEditor((s) => s.addObject);
@@ -139,12 +140,7 @@ export function Toolbar({ onOpenSignature }: { onOpenSignature: () => void }) {
         <div className="mr-2 max-w-[24ch] truncate text-xs text-muted-foreground">
           {doc?.fileName}
         </div>
-        <button
-          className="tool-btn"
-          onClick={undo}
-          disabled={historyIndex <= 0}
-          title="Undo"
-        >
+        <button className="tool-btn" onClick={undo} disabled={historyIndex <= 0} title="Undo">
           <Undo2 className="h-4 w-4" />
         </button>
         <button

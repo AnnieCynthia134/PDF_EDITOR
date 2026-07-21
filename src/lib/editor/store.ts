@@ -144,9 +144,7 @@ export const useEditor = create<EditorState>((set, get) => ({
     if (!state.doc) return;
     const newDoc: DocumentState = {
       ...state.doc,
-      objects: state.doc.objects.map((o) =>
-        o.id === id ? ({ ...o, ...patch } as EditorObj) : o,
-      ),
+      objects: state.doc.objects.map((o) => (o.id === id ? ({ ...o, ...patch } as EditorObj) : o)),
     };
     pushHistory(set, get, newDoc);
   },
@@ -327,8 +325,6 @@ function remapPages(
   const oldIds = new Set(doc.pages.map((p) => p.id));
   const insertedAt = newPages.findIndex((p) => !oldIds.has(p.id));
   if (insertedAt === -1) return { ...doc, pages: newPages };
-  const objects = doc.objects.map((o) =>
-    o.page >= insertedAt ? { ...o, page: o.page + 1 } : o,
-  );
+  const objects = doc.objects.map((o) => (o.page >= insertedAt ? { ...o, page: o.page + 1 } : o));
   return { ...doc, pages: newPages, objects };
 }

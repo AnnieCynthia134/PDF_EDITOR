@@ -62,7 +62,11 @@ export function UploadDropzone({ onRestore }: { onRestore?: () => void }) {
         <input {...getInputProps()} />
         <Upload className="mx-auto mb-4 h-8 w-8 text-muted-foreground" />
         <p className="text-sm font-medium">
-          {loading ? "Loading…" : isDragActive ? "Drop the PDF here" : "Drop a PDF here, or click to browse"}
+          {loading
+            ? "Loading…"
+            : isDragActive
+              ? "Drop the PDF here"
+              : "Drop a PDF here, or click to browse"}
         </p>
         <p className="mt-1 text-xs text-muted-foreground">PDF only · up to 50 MB</p>
       </div>

@@ -61,8 +61,14 @@
 }
 
 @layer base {
-  * { border-color: var(--color-border); }
-  html, body, #root { height: 100%; }
+  * {
+    border-color: var(--color-border);
+  }
+  html,
+  body,
+  #root {
+    height: 100%;
+  }
   body {
     background-color: var(--color-background);
     color: var(--color-foreground);
@@ -72,11 +78,26 @@
 }
 
 /* Editor-specific */
-.editor-canvas-shadow { box-shadow: 0 1px 3px rgba(0,0,0,0.06), 0 8px 24px -8px rgba(0,0,0,0.08); }
-.tool-btn {
-  display: inline-flex; align-items: center; justify-content: center;
-  width: 2.25rem; height: 2.25rem; border-radius: 0.5rem;
-  color: var(--color-muted-foreground); transition: all 0.15s;
+.editor-canvas-shadow {
+  box-shadow:
+    0 1px 3px rgba(0, 0, 0, 0.06),
+    0 8px 24px -8px rgba(0, 0, 0, 0.08);
 }
-.tool-btn:hover { background: var(--color-accent); color: var(--color-foreground); }
-.tool-btn[data-active="true"] { background: var(--color-primary); color: var(--color-primary-foreground); }
+.tool-btn {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 2.25rem;
+  height: 2.25rem;
+  border-radius: 0.5rem;
+  color: var(--color-muted-foreground);
+  transition: all 0.15s;
+}
+.tool-btn:hover {
+  background: var(--color-accent);
+  color: var(--color-foreground);
+}
+.tool-btn[data-active="true"] {
+  background: var(--color-primary);
+  color: var(--color-primary-foreground);
+}
