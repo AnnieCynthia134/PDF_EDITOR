@@ -1,0 +1,26 @@
+services:
+  pdf-editor:
+    build: .
+    container_name: pdf-editor
+    restart: unless-stopped
+    ports:
+      - "8080:8080"
+    command: npm run dev -- --host 0.0.0.0
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:16-alpine
+    container_name: pdf-editor-db
+    restart: unless-stopped
+    environment:
+      POSTGRES_USER: pdfuser
+      POSTGRES_PASSWORD: pdfpassword
+      POSTGRES_DB: pdfeditor
+    ports:
+      - "5432:5432"
+    volumes:
+      - postgres_data:/var/lib/postgresql/data
+
+volumes:
+  postgres_data:
